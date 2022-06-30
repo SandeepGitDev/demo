@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      var myObj = {
+        portfoilo: [
+          { abc: 123, xyz: 12 },
+          { abc: 1244, xyz: 12 },
+        ],
+        group: [
+          {
+            portfoilo: [
+              { abc: 123, xyz: 12 },
+              { abc: 1244, xyz: 12 }
+            ],
+            group: [
+              {
+                group: [],
+                portfoilo: [
+                  { abc: 123, xyz: 12 },
+                  { abc: 1244, xyz: 12 }
+                ]
+              },
+            ],
+            asset: [
+              {
+                portfoilo: [
+                  { abc: 123, xyz: 12 },
+                  { abc: 1244, xyz: 12 }
+                ],
+              },
+            ],
+          },
+        ],
+      };
+
+      function removeXYZ(obj) {
+        for (keys in Object.keys(obj)) {
+          if (Object.keys(obj)[keys] === "portfoilo") {
+            for (item in obj) {
+              for (insideItem in obj[item]) {
+                if (obj[item][insideItem].hasOwnProperty("xyz")) {
+                    delete obj[item][insideItem].xyz;
+                } else {
+                    debugger;
+                    removeXYZ(obj[item][insideItem]);
+                }
+              }
+            }
+          }
+        }
+      }
+
+    removeXYZ(myObj);
+    console.log(myObj);
+    </script>
+  </body>
+</html>
